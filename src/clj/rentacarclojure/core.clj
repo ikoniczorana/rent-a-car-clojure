@@ -25,7 +25,9 @@
   :start
   (http/start
     (-> env
-        (assoc  :handler (handler/app))
+        (assoc
+          :host "127.0.0.1"
+          :handler (handler/app))
         (update :io-threads #(or % (* 2 (.availableProcessors (Runtime/getRuntime)))))
         (update :port #(or (-> env :options :port) %))))
   :stop
