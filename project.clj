@@ -27,7 +27,19 @@
                  [ring-webjars "0.2.0"]
                  [ring/ring-core "1.7.1"]
                  [ring/ring-defaults "0.3.2"]
-                 [selmer "1.12.14"]]
+                 [ring/ring-json "0.4.0"]
+                 [selmer "1.12.14"]
+                 [funcool/struct "1.3.0"]
+                 [mysql/mysql-connector-java "8.0.15"]
+                 [buddy/buddy-auth "2.1.0"]
+                 [com.cerner/clara-rules "0.19.0"]
+                 [org.clojure/java.jdbc "0.7.9"]
+                 [korma/korma "0.4.3"]
+                 [migratus "1.2.2"]
+                 [ring-server "0.5.0"]
+                 [compojure "1.6.1"]
+                 [liberator "0.15.2"]
+                 ]
 
   :min-lein-version "2.0.0"
   
@@ -37,7 +49,9 @@
   :target-path "target/%s/"
   :main ^:skip-aot rentacarclojure.core
 
-  :plugins []
+  :plugins [[lein-ring "0.12.5"]
+            [migratus-lein "0.7.1"]
+            ]
 
   :profiles
   {:uberjar {:omit-source true
