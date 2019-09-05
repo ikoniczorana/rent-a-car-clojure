@@ -66,6 +66,7 @@
     <orderEntry type="library" name="Leiningen: korma:0.4.3" level="project" />
     <orderEntry type="library" name="Leiningen: lambdaisland/deep-diff:0.0-47" level="project" />
     <orderEntry type="library" name="Leiningen: liberator:0.15.2" level="project" />
+    <orderEntry type="library" name="Leiningen: log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Leiningen: luminus-jetty:0.1.7" level="project" />
     <orderEntry type="library" name="Leiningen: luminus-transit:0.1.1" level="project" />
     <orderEntry type="library" name="Leiningen: luminus/ring-ttl-session:0.3.3" level="project" />
@@ -134,6 +135,7 @@
     <orderEntry type="library" name="Leiningen: org.ow2.asm/asm-all:4.2" level="project" />
     <orderEntry type="library" name="Leiningen: org.ow2.asm/asm:5.1" level="project" />
     <orderEntry type="library" name="Leiningen: org.slf4j/slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" name="Leiningen: org.slf4j/slf4j-log4j12:1.7.26" level="project" />
     <orderEntry type="library" name="Leiningen: org.webjars.npm/bulma:0.7.5" level="project" />
     <orderEntry type="library" name="Leiningen: org.webjars.npm/material-icons:0.3.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.webjars/webjars-locator-core:0.37" level="project" />

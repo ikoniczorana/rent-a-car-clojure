@@ -39,6 +39,7 @@
                  [ring-server "0.5.0"]
                  [compojure "1.6.1"]
                  [liberator "0.15.2"]
+                 [org.slf4j/slf4j-log4j12 "1.7.26"]
                  ]
 
   :min-lein-version "2.0.0"
@@ -52,7 +53,9 @@
   :plugins [[lein-ring "0.12.5"]
             [migratus-lein "0.7.1"]
             ]
-
+  :migratus {:store :database
+             :migration-dir "migrations"
+             :db (clojure.edn/read-string (slurp "configuration/migratus-conf.edn"))}
   :profiles
   {:uberjar {:omit-source true
              :aot :all
