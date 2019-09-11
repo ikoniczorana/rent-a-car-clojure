@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <form method="post" action="addRequest">
+    <fieldset>
+      <legend>Request for the rent</legend>
+      <div class="form-group row">
+        <label for="city" class="col-lg-3">Choose a city: </label>
+        <div class="col-lg-8">
+          <select id="city" name="city" class="form-control">
+            {% for city in cities %}
+            <option value="{{city.cityid}}">{{city.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="car" class="col-lg-3">Choose a car:</label>
+        <div class="col-lg-8">
+          <select class="form-control" name="car"
+                  id="car" multiple="multiple">
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="name" class="col-lg-3">Person name: </label>
+        <div class="col-lg-8">
+                    <textarea class="form-control" rows="1" cols="50" id="name" name="name"
+                              placeholder="Enter driver name"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="birthyear" class="col-lg-3">Driver birth year: </label>
+        <div class="col-lg-8">
+                    <textarea class="form-control" rows="1" cols="50" id="birthyear" name="birthyear"
+                              placeholder="Enter driver birth year"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="idnumber" class="col-lg-3">Driver identification number: </label>
+        <div class="col-lg-8">
+                    <textarea class="form-control" rows="1" cols="50" id="idnumber" name="idnumber"
+                              placeholder="Enter driver id number"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="driverlicence" class="col-lg-3">Driver licence number: </label>
+        <div class="col-lg-8">
+                    <textarea class="form-control" rows="1" cols="50" id="driverlicence" name="driverlicence"
+                              placeholder="Enter driver licence number"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="beginningyear" class="col-lg-3">Start year: </label>
+        <div class="col-lg-8">
+                    <textarea class="form-control" rows="1" cols="50" id="beginningyear" name="beginningyear"
+                              placeholder="Enter year when person has been passed driver test"></textarea>
+        </div>
+      </div>
+      <div class="text-right">
+        <button type="button" class="btn btn-primary" id="processRequest">Submit</button>
+      </div>
+    </fieldset>
+  </form>
+</div>
+{% endblock %}
+
+{% block page-scripts%}
+{% script "/js/report.js" %}
+{% endblock %}
+
+

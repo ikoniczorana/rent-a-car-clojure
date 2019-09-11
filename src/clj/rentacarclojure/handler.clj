@@ -1,35 +1,41 @@
 (ns rentacarclojure.handler
-  (:require
-    [rentacarclojure.middleware :as middleware]
-    [rentacarclojure.layout :refer [error-page]]
-    [rentacarclojure.routes.home :refer [home-routes]]
-    [reitit.ring :as ring]
-    [ring.middleware.content-type :refer [wrap-content-type]]
-    [ring.middleware.webjars :refer [wrap-webjars]]
-    [rentacarclojure.env :refer [defaults]]
-    [mount.core :as mount]))
+  (:require [org.httpkit.server :refer [run-server]]
+            [compojure.core :refer [defroutes routes]]
+            [compojure.handler :as handler]
+            [compojure.route :as route]
+            [ring.middleware.resource :refer [wrap-resource]]
+            [ring.middleware.file-info :refer [wrap-file-info]]
+            [ring.middleware.session :refer [wrap-session]]
+            [ring.middleware.params :refer [wrap-params]]
+            [hiccup.middleware :refer [wrap-base-url]]
+            [liberator.dev :refer :all]
+            [selmer.parser :refer :all]
+            [rentacarclojure.routes.home :refer [home-routes]]
+            [rentacarclojure.routes.login :refer [login-routes]]
+            [ring.middleware.webjars :refer [wrap-webjars]]
+            [ring.middleware.flash :refer [wrap-flash]]
+            [buddy.auth.backends.session :refer [session-backend]]
+            [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
+            [buddy.auth.accessrules :refer [wrap-access-rules success error]]
+            [buddy.auth :refer [authenticated?]]
+            [buddy.auth.accessrules :refer [restrict]]
+            [ring.middleware.json :refer [wrap-json-response]]))
 
-(mount/defstate init-app
-  :start ((or (:init defaults) (fn [])))
-  :stop  ((or (:stop defaults) (fn []))))
 
-(mount/defstate app-routes
-  :start
-  (ring/ring-handler
-    (ring/router
-      [(home-routes)])
-    (ring/routes
-      (ring/create-resource-handler
-        {:path "/"})
-      (wrap-content-type
-        (wrap-webjars (constantly nil)))
-      (ring/create-default-handler
-        {:not-found
-         (constantly (error-page {:status 404, :title "404 - Page not found"}))
-         :method-not-allowed
-         (constantly (error-page {:status 405, :title "405 - Not allowed"}))
-         :not-acceptable
-         (constantly (error-page {:status 406, :title "406 - Not acceptable"}))}))))
 
-(defn app []
-  (middleware/wrap-base #'app-routes))
+(def backend (session-backend))
+
+(defroutes app-routes
+           (route/resources "/")
+           (route/not-found "Not Found"))
+
+
+(def app
+  (-> (routes home-routes login-routes app-routes )
+      (wrap-json-response)
+      (handler/site)
+      (wrap-authentication backend)
+      (wrap-authorization backend)
+      (wrap-base-url)
+      (wrap-trace :header :ui)
+      (wrap-resource "public")))

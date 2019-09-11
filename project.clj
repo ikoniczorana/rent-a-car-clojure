@@ -24,6 +24,9 @@
                  [org.webjars.npm/bulma "0.7.5"]
                  [org.webjars.npm/material-icons "0.3.0"]
                  [org.webjars/webjars-locator "0.36"]
+                 [org.webjars/bootstrap "4.3.0"]
+                 [org.webjars/font-awesome "5.7.2"]
+                 [org.webjars/jquery "3.3.1-2"]
                  [ring-webjars "0.2.0"]
                  [ring/ring-core "1.7.1"]
                  [ring/ring-defaults "0.3.2"]
@@ -56,14 +59,23 @@
   :migratus {:store :database
              :migration-dir "migrations"
              :db (clojure.edn/read-string (slurp "configuration/migratus-conf.edn"))}
+  :ring {:handler rentacarclojure.handler/app}
   :profiles
   {:uberjar {:omit-source true
              :aot :all
              :uberjar-name "rentacarclojure.jar"
-             :source-paths ["env/prod/clj"]
-             :resource-paths ["env/prod/resources"]}
+             }
+   :production
+            {:ring
+             {:open-browser? false, :stacktraces? false, :auto-reload? false}}
 
-   :dev           [:project/dev :profiles/dev]
+   :dev {:dependencies [[javax.servlet/servlet-api "2.5"]
+                        [ring/ring-mock "0.3.2"]
+                        [figwheel "0.2.5"]
+                        [com.cemerick/piggieback "0.2.0"]
+                        [org.clojure/tools.nrepl "0.2.10"]
+                        [weasel "0.6.0"]
+                        ]}
    :test          [:project/dev :project/test :profiles/test]
 
    :project/dev  {:jvm-opts ["-Dconf=dev-config.edn"]
@@ -72,13 +84,11 @@
                                  [ring/ring-devel "1.7.1"]
                                  [ring/ring-mock "0.4.0"]]
                   :plugins      [[com.jakemccrary/lein-test-refresh "0.24.1"]]
-                  
-                  :source-paths ["env/dev/clj"]
-                  :resource-paths ["env/dev/resources"]
+
                   :repl-options {:init-ns user}
                   :injections [(require 'pjstadig.humane-test-output)
                                (pjstadig.humane-test-output/activate!)]}
-   :project/test {:jvm-opts ["-Dconf=test-config.edn"]
-                  :resource-paths ["env/test/resources"]}
    :profiles/dev {}
    :profiles/test {}})
+
+
