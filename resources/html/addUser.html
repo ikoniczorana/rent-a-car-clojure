@@ -51,7 +51,7 @@
   </div>
 </nav>
 <div class="container">
-  <form method="post" action="adduser">
+  <form method="post" name="user" action="">
     <fieldset>
       <legend>Add new user in system</legend>
       <div class="form-group row">
@@ -90,14 +90,17 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="role" class="col-lg-3">Role: </label>
+        <label for="assignedrole" class="col-lg-3">Role: </label>
         <div class="col-lg-8">
-                    <textarea class="form-control" rows="1" cols="50" id="role" name="role"
-                              placeholder="Enter role for the user"></textarea>
+          <select id="assignedrole" name="assignedrole" class="form-control">
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
         </div>
       </div>
+
       <div class="text-right">
-        <button type="button" class="btn btn-primary" id="addUser">Submit</button>
+        <button type="submit" class="btn btn-primary" id="addUser">Submit</button>
       </div>
     </fieldset>
   </form>

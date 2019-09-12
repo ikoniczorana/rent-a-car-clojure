@@ -55,19 +55,9 @@
     <fieldset>
       <legend>Request for the rent</legend>
       <div class="form-group row">
-        <label for="city" class="col-lg-3">Choose a city: </label>
+        <label for="carid" class="col-lg-3">Choose a car: </label>
         <div class="col-lg-8">
-          <select id="city" name="city" class="form-control">
-            {% for city in cities %}
-            <option value="{{city.cityid}}">{{city.name}}</option>
-            {% endfor %}
-          </select>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="car" class="col-lg-3">Choose a car: </label>
-        <div class="col-lg-8">
-          <select id="car" name="car" class="form-control">
+          <select id="carid" name="carid" class="form-control">
             {% for car in cars %}
             <option value="{{car.carid}}">{{car.type}} {{car.brand}}</option>
             {% endfor %}
@@ -117,14 +107,20 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="todate" class="col-lg-3">Driver licence number: </label>
+        <label for="todate" class="col-lg-3">To date: </label>
         <div class="col-lg-8">
                     <textarea class="form-control" rows="1" cols="50" id="todate" name="todate"
                               placeholder="Enter end rent date"></textarea>
         </div>
       </div>
+      <div class="form-group row">
+        <label for="userid" class="col-lg-3">Current user: </label>
+        <div class="col-lg-8">
+          <input class="table-cell" type="text" name="userid" id="userid" value="{{logged.userid}}" readonly>
+        </div>
+      </div>
       <div class="text-right">
-        <button type="button" class="btn btn-primary" id="processRequest">Submit</button>
+        <button type="submit" class="btn btn-primary" id="processRequest">Submit</button>
       </div>
     </fieldset>
   </form>

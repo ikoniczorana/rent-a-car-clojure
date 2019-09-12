@@ -47,7 +47,7 @@
     (render-file "addRequest.html" {:title "Add new request for rent"
                                     :cities (controller/get-all-cities)
                                     :cars (controller/get-all-cars)
-                                        :logged (:identity session)})))
+                                    :logged (:identity session)})))
 
 (defn add-request [{:keys [params session]}]
   (request-valid? params)
