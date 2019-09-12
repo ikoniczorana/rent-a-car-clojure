@@ -11,7 +11,9 @@
             [liberator.dev :refer :all]
             [selmer.parser :refer :all]
             [rentacarclojure.routes.home :refer [home-routes]]
+            [rentacarclojure.routes.request :refer [request-routes]]
             [rentacarclojure.routes.login :refer [login-routes]]
+            [rentacarclojure.routes.user :refer [user-routes]]
             [ring.middleware.webjars :refer [wrap-webjars]]
             [ring.middleware.flash :refer [wrap-flash]]
             [buddy.auth.backends.session :refer [session-backend]]
@@ -31,7 +33,7 @@
 
 
 (def app
-  (-> (routes home-routes login-routes app-routes )
+  (-> (routes home-routes login-routes request-routes user-routes app-routes )
       (wrap-json-response)
       (handler/site)
       (wrap-authentication backend)

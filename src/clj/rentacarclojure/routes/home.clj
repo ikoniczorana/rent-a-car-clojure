@@ -42,8 +42,7 @@
               :password (:password params)} login-schema))
 
 (defn get-user [params]
-
-      (first (controller/get-user-by-email(select-keys params [:email]))))
+  (first (controller/get-user-by-email(select-keys params [:email]))))
 
 
 (defn login-page-submit [{:keys [params session]}]

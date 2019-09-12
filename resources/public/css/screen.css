@@ -32,7 +32,7 @@ body {
   /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
 }
-body{background: #eee url(http://subtlepatterns.com/patterns/sativa.png);}
+body{background: #eee url(https://backgrounddownload.com/wp-content/uploads/2018/09/simple-presentation-background-5.jpg);}
 html,body{
     position: relative;
     height: 100%;
@@ -47,7 +47,6 @@ html,body{
     background: #fff;
     border: 1px solid #ccc;
 }
-
 #output{
     position: absolute;
     width: 300px;
@@ -171,3 +170,13 @@ html,body{
 nav {
     margin-bottom: 20px;
 }
+
+.requests-container{
+      position: relative;
+      width: 1200px;
+      margin: 80px auto;
+      padding: 20px 40px 40px;
+      text-align: center;
+    background: #fff;
+}
+

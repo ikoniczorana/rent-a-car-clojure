@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Add request</title>
+  <title>Add user</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -51,80 +51,53 @@
   </div>
 </nav>
 <div class="container">
-  <form method="post" action="addRequest">
+  <form method="post" action="adduser">
     <fieldset>
-      <legend>Request for the rent</legend>
+      <legend>Add new user in system</legend>
       <div class="form-group row">
-        <label for="city" class="col-lg-3">Choose a city: </label>
+        <label for="firstname" class="col-lg-3">First name: </label>
         <div class="col-lg-8">
-          <select id="city" name="city" class="form-control">
-            {% for city in cities %}
-            <option value="{{city.cityid}}">{{city.name}}</option>
-            {% endfor %}
-          </select>
+                    <textarea class="form-control" rows="1" cols="50" id="firstname" name="firstname"
+                              placeholder="Enter first name of the user"></textarea>
         </div>
       </div>
       <div class="form-group row">
-        <label for="car" class="col-lg-3">Choose a car: </label>
+        <label for="lastname" class="col-lg-3">Last name: </label>
         <div class="col-lg-8">
-          <select id="car" name="car" class="form-control">
-            {% for car in cars %}
-            <option value="{{car.carid}}">{{car.type}} {{car.brand}}</option>
-            {% endfor %}
-          </select>
+                    <textarea class="form-control" rows="1" cols="50" id="lastname" name="lastname"
+                              placeholder="Enter last name of the user"></textarea>
         </div>
       </div>
       <div class="form-group row">
-        <label for="name" class="col-lg-3">Person name: </label>
+        <label for="username" class="col-lg-3">Username: </label>
         <div class="col-lg-8">
-                    <textarea class="form-control" rows="1" cols="50" id="name" name="name"
-                              placeholder="Enter driver name"></textarea>
+                    <textarea class="form-control" rows="1" cols="50" id="username" name="username"
+                              placeholder="Enter short name for the user"></textarea>
         </div>
       </div>
       <div class="form-group row">
-        <label for="birthyear" class="col-lg-3">Driver birth year: </label>
+        <label for="password" class="col-lg-3">Password: </label>
         <div class="col-lg-8">
-                    <textarea class="form-control" rows="1" cols="50" id="birthyear" name="birthyear"
-                              placeholder="Enter driver birth year"></textarea>
+                    <textarea class="form-control" rows="1" cols="50" id="password" name="password"
+                              placeholder="Enter password for the user"></textarea>
         </div>
       </div>
       <div class="form-group row">
-        <label for="idnumber" class="col-lg-3">Driver identification number: </label>
+        <label for="email" class="col-lg-3">Email: </label>
         <div class="col-lg-8">
-                    <textarea class="form-control" rows="1" cols="50" id="idnumber" name="idnumber"
-                              placeholder="Enter driver id number"></textarea>
+                    <textarea class="form-control" rows="1" cols="50" id="email" name="email"
+                              placeholder="Enter user email"></textarea>
         </div>
       </div>
       <div class="form-group row">
-        <label for="driverlicence" class="col-lg-3">Driver licence number: </label>
+        <label for="role" class="col-lg-3">Role: </label>
         <div class="col-lg-8">
-                    <textarea class="form-control" rows="1" cols="50" id="driverlicence" name="driverlicence"
-                              placeholder="Enter driver licence number"></textarea>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="beginningyear" class="col-lg-3">Start year: </label>
-        <div class="col-lg-8">
-                    <textarea class="form-control" rows="1" cols="50" id="beginningyear" name="beginningyear"
-                              placeholder="Enter year when person has been passed driver test"></textarea>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="fromdate" class="col-lg-3">From date: </label>
-        <div class="col-lg-8">
-                    <textarea class="form-control" rows="1" cols="50" id="fromdate" name="fromdate"
-                              placeholder="Enter start rent date"></textarea>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="todate" class="col-lg-3">Driver licence number: </label>
-        <div class="col-lg-8">
-                    <textarea class="form-control" rows="1" cols="50" id="todate" name="todate"
-                              placeholder="Enter end rent date"></textarea>
+                    <textarea class="form-control" rows="1" cols="50" id="role" name="role"
+                              placeholder="Enter role for the user"></textarea>
         </div>
       </div>
       <div class="text-right">
-        <button type="button" class="btn btn-primary" id="processRequest">Submit</button>
+        <button type="button" class="btn btn-primary" id="addUser">Submit</button>
       </div>
     </fieldset>
   </form>

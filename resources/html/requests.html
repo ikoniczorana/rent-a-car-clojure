@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Submited requests</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="footer, contact, form, icons" />
+  <link rel="stylesheet" href="css/screen.css">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/footer-distributed-with-contact-form.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Rent a car</a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/addRequest">Add request</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/requests">Requests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/addUser">Add user</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users">All users</a>
+      </li>
+
+    </ul>
+    <ul class="nav navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Logout</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <div class ="requests-container">
+  <div class="row col-lg-12">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>Driver name</th>
+          <th>Birth year</th>
+          <th>Id number</th>
+          <th>Licence number</th>
+          <th>Beginning year</th>
+          <th>Car</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for request in requests %}
+        <tr id="{{request.requestid}}">
+
+          <td class="name">{{request.name}}</td>
+          <td class="birthyear">{{request.birthyear}}</td>
+          <td class="idnumber">{{request.idnumber}}</td>
+          <td class="driverlicence">{{request.driverlicence}}</td>
+          <td class="beginningyear">{{request.beginningyear}}</td>
+          <td>{{request.carid}}</td>
+          <td>
+            <button type="button" data-toggle="modal" data-target="#edit" data-id={{request.requestid}}
+                    class="update btn btn-info btn-sm"><span class="fa fa-edit"
+                                                                aria-hidden="true"></span>
+            </button>
+          </td>
+          <td>
+            <button type="button" data-toggle="modal" data-target="#delete" data-id={{request.requestid}}
+                    class="delete btn btn-info btn-sm"><span class="fa fa-trash"></span>
+            </button>
+          </td>
+          {% endfor %}
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+</div>
+<div id="edit" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Update request</h4>
+      </div>
+      <div class="modal-body">
+
+        <input type="hidden" value="" id="request_id">
+        <div class="form-group row">
+          <label class="col-md-3 control-label">From date:</label>
+          <div class="col-md-9">
+            <input id="fromdate" type="text" class="form-control" name="fname" placeholder="From date">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 control-label">To date:</label>
+          <div class="col-md-9">
+            <input id="todate" type="text" class="form-control" name="fname"
+                   placeholder="To date">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="edit_button" class="btn btn-info">Update</button>
+        <button type="button" class="btn btn-basic" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="delete" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete request</h4>
+      </div>
+      <div class="modal-body">
+        <strong>Are you sure?</strong>
+        <input type="hidden" value="" id="deleterequest">
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="delete_button" class="btn btn-info" data-dismiss="modal">Proceed</button>
+        <button type="button" class="btn btn-basic" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
