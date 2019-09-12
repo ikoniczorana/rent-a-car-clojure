@@ -10,6 +10,7 @@
 
 (defdb db (mysql db-config))
 
+
 (k/defentity user
              (k/table :user))
 
@@ -20,7 +21,6 @@
 (defn get-all-users[]
   (k/select user))
 
-
 (defn find-user [params]
   (k/select user
             (k/where params)))
@@ -29,6 +29,11 @@
   (k/select user
             (k/where params)))
 
+(defn delete-user [id]
+  (k/delete user
+            (k/where {:userid id})))
+
+
 (k/defentity request
              (k/table :request))
 
@@ -36,6 +41,18 @@
 (defn add-request [params]
   (k/insert request
             (k/values params)))
+
+(defn get-all-requests[]
+  (k/select request))
+
+(defn delete-request [id]
+  (k/delete request
+            (k/where {:requestid id})))
+
+(defn find-request [params]
+  (k/select request
+            (k/where params)))
+
 
 (k/defentity city
              (k/table :city))
@@ -51,8 +68,4 @@
 (defn get-all-cars[]
   (k/select car))
 
-(k/defentity request
-             (k/table :request))
 
-(defn get-all-requests[]
-  (k/select request))

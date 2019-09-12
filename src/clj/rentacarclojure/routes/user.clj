@@ -52,8 +52,15 @@
     (render-file "users.html" {:users (controller/get-all-users)})
     (redirect "/login")))
 
+(defn delete-user [{:keys [params session]}]
+  (user-valid? params)
+  (println params)
+  (controller/delete-user params)
+  (redirect "/home"))
+
 
 (defroutes user-routes
            (GET "/addUser" user (get-add-user-page (:session user)))
            (POST "/addUser" user (add-user user))
-           (GET "/users" user (get-all-users (:session user))))
+           (GET "/users" user (get-all-users (:session user)))
+           (POST "/deleteuser" request (delete-user request)))
