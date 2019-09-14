@@ -47,18 +47,13 @@
   (user-valid? params)
   (println params)
   (controller/add-user params)
-  (redirect "/home"))
+  (redirect "/users"))
 
 (defn get-all-users [{:keys [params session]}]
   (if-not (authenticated? session)
     (render-file "users.html" {:users (controller/get-all-users)})
     (redirect "/login")))
 
-(defn delete-user [{:keys [params session]}]
-  (user-valid? params)
-  (println "ZORANA")
-  (controller/delete-user params)
-  (redirect "/home"))
 
 (defresource delete-userr [{:keys [params session]}]
              (pp/pprint "ovde sam")
@@ -77,6 +72,5 @@
            (POST "/addUser" user (add-user user))
            (GET "/users" user (get-all-users (:session user)))
            (DELETE "/deleteuser" request (delete-userr request))
-           (POST "/deleteuser" request (delete-user request))
            (POST "/editUser" request (update-user request))
            )

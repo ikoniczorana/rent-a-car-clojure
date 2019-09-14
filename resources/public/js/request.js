@@ -2,6 +2,8 @@ $(document).ready(function () {
     $(".update").on('click', function () {
           var row = $(this).closest('tr');
           $("#requestid").val(row.attr("id"));
+          $("#fromdate").val(row.find(".fromdate").text());
+          $("#todate").val(row.find(".todate").text());
       });
         $("#edit_button").on('click', function () {
                 var requestid = $("#requestid").val();

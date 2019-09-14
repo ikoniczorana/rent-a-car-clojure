@@ -18,10 +18,10 @@ $(document).ready(function () {
        		        },
        		        dataType: 'json',
        		        success: function(data) {
-       		            window.location = "/home";
+       		            window.location = "/users";
        		        },
        		        error: function(data) {
-                      window.location = "/home";
+                      window.location = "/users";
                   }
 
        		    });
