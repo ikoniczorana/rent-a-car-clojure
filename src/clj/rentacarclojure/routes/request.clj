@@ -41,13 +41,18 @@
               :carid (read-string (:carid params))
               :userid (read-string (:userid params))} request-schema))
 
+
+
 (defn get-add-request-page [session &[message]]
   (if-not (authenticated? session)
     (redirect "/")
     (render-file "addRequest.html" {:title "Add new request for rent"
                                     :cities (controller/get-all-cities)
                                     :cars (controller/get-all-cars)
+                                    :admin (layout/is-admin? session)
                                     :logged (:identity session)})))
+
+
 
 (defn add-request [{:keys [params session]}]
   (request-valid? params)
@@ -55,14 +60,20 @@
   (controller/add-request params)
   (redirect "/home"))
 
-(defn get-all-request [{:keys [params session]}]
-  (if-not (authenticated? session)
-    (render-file "requests.html" {:requests (controller/get-all-requests)})
-    (redirect "/login")))
+(defn get-all-request [session &[message]]
+  (render-file "requests.html" {:requests (controller/get-all-requests)
+                                  :admin (layout/is-admin? session)}))
+
+(defn edit-request [{:keys [params session]}]
+  :allowed-methods [:put]
+  :available-media-types ["application/json"]
+  (println params)
+  (controller/update-request params))
 
 (defroutes request-routes
   (GET "/addRequest" request (get-add-request-page (:session request)))
   (POST "/addRequest" request (add-request request))
-  (GET "/requests" request (get-all-request (:session request))))
+  (GET "/requests" request (get-all-request (:session request)))
+  (POST "/editRequest" request (edit-request request)))
 
 

@@ -17,7 +17,8 @@
     [liberator.representation :refer [ring-response as-response]]
     [clojure.set :refer [rename-keys]]
     [clojure.string :as str]
-    [rentacarclojure.layout :as layout]))
+    [rentacarclojure.layout :as layout]
+    [clojure.pprint :as pp]))
 
 (def user-schema
   {:firstname [st/required st/string]
@@ -39,7 +40,8 @@
   (if-not (authenticated? session)
     (redirect "/")
     (render-file "addUser.html" {:title "Add new user in db"
-                                    :logged (:identity session)})))
+                                    :logged (:identity session)
+                                    })))
 
 (defn add-user [{:keys [params session]}]
   (user-valid? params)
@@ -54,13 +56,27 @@
 
 (defn delete-user [{:keys [params session]}]
   (user-valid? params)
-  (println params)
+  (println "ZORANA")
   (controller/delete-user params)
   (redirect "/home"))
 
+(defresource delete-userr [{:keys [params session]}]
+             (pp/pprint "ovde sam")
+             :allowed-methods [:delete]
+             (controller/delete-user (:userid params))
+             :available-media-types ["application/json"])
+
+(defn update-user [{:keys [params session]}]
+             :allowed-methods [:put]
+             :available-media-types ["application/json"]
+             (println params)
+             (controller/update-user params))
 
 (defroutes user-routes
            (GET "/addUser" user (get-add-user-page (:session user)))
            (POST "/addUser" user (add-user user))
            (GET "/users" user (get-all-users (:session user)))
-           (POST "/deleteuser" request (delete-user request)))
+           (DELETE "/deleteuser" request (delete-userr request))
+           (POST "/deleteuser" request (delete-user request))
+           (POST "/editUser" request (update-user request))
+           )

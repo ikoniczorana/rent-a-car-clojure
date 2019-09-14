@@ -26,7 +26,7 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/addRequest">Add request</a>
@@ -34,12 +34,14 @@
       <li class="nav-item">
         <a class="nav-link" href="/requests">Requests</a>
       </li>
+      {% ifequal admin "true" %}
       <li class="nav-item">
         <a class="nav-link" href="/addUser">Add user</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/users">All users</a>
       </li>
+      {% endifequal %}
 
     </ul>
     <ul class="nav navbar-nav ml-auto">
@@ -114,9 +116,9 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="userid" class="col-lg-3">Current user: </label>
+
         <div class="col-lg-8">
-          <input class="table-cell" type="text" name="userid" id="userid" value="{{logged.userid}}" readonly>
+          <input class="table-cell" type="hidden" name="userid" id="userid" value="{{logged.userid}}" readonly>
         </div>
       </div>
       <div class="text-right">

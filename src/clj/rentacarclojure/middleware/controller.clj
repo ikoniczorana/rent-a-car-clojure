@@ -33,6 +33,11 @@
   (k/delete user
             (k/where {:userid id})))
 
+(defn update-user [params]
+  (k/update user
+            (k/set-fields params)
+            (k/where {:userid (:userid params)})))
+
 
 (k/defentity request
              (k/table :request))
@@ -43,7 +48,9 @@
             (k/values params)))
 
 (defn get-all-requests[]
-  (k/select request))
+  (k/select request
+    (k/fields :* [:car.type :ctype])
+    (k/join car (= :request.carid :car.carid))))
 
 (defn delete-request [id]
   (k/delete request
@@ -52,6 +59,12 @@
 (defn find-request [params]
   (k/select request
             (k/where params)))
+
+(defn update-request [params]
+  (k/update request
+            (k/set-fields params)
+            (k/where {:requestid (:requestid params)})))
+
 
 
 (k/defentity city

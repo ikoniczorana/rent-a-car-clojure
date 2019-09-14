@@ -14,7 +14,11 @@
   <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="js/request.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,7 +26,7 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/addRequest">Add request</a>
@@ -30,13 +34,14 @@
       <li class="nav-item">
         <a class="nav-link" href="/requests">Requests</a>
       </li>
+      {% ifequal admin "true" %}
       <li class="nav-item">
         <a class="nav-link" href="/addUser">Add user</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/users">All users</a>
       </li>
-
+      {% endifequal %}
     </ul>
     <ul class="nav navbar-nav ml-auto">
       <li class="nav-item">
@@ -55,12 +60,13 @@
         <tr>
           <th>Driver name</th>
           <th>Birth year</th>
-          <th>Id number</th>
+          <th>Identification number</th>
           <th>Licence number</th>
           <th>Beginning year</th>
-          <th>Car</th>
+          <th>From date</th>
+          <th>To date</th>
+          <th>Car type</th>
           <th>Edit</th>
-          <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -72,16 +78,13 @@
           <td class="idnumber">{{request.idnumber}}</td>
           <td class="driverlicence">{{request.driverlicence}}</td>
           <td class="beginningyear">{{request.beginningyear}}</td>
-          <td>{{request.carid}}</td>
+          <td class="fromdate">{{request.fromdate}}</td>
+          <td class="todate">{{request.todate}}</td>
+          <td>{{request.ctype}}</td>
           <td>
             <button type="button" data-toggle="modal" data-target="#edit" data-id={{request.requestid}}
                     class="update btn btn-info btn-sm"><span class="fa fa-edit"
                                                                 aria-hidden="true"></span>
-            </button>
-          </td>
-          <td>
-            <button type="button" data-toggle="modal" data-target="#delete" data-id={{request.requestid}}
-                    class="delete btn btn-info btn-sm"><span class="fa fa-trash"></span>
             </button>
           </td>
           {% endfor %}
@@ -100,41 +103,23 @@
       </div>
       <div class="modal-body">
 
-        <input type="hidden" value="" id="request_id">
+        <input type="text" value="" id="requestid">
         <div class="form-group row">
           <label class="col-md-3 control-label">From date:</label>
           <div class="col-md-9">
-            <input id="fromdate" type="text" class="form-control" name="fname" placeholder="From date">
+            <input class="form-control" id="fromdate" name="fromdate" placeholder="From date" type="text">
           </div>
         </div>
 
         <div class="form-group row">
           <label class="col-md-3 control-label">To date:</label>
           <div class="col-md-9">
-            <input id="todate" type="text" class="form-control" name="fname"
-                   placeholder="To date">
+            <input class="form-control" id="todate" name="todate" placeholder="To date" type="text">
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" id="edit_button" class="btn btn-info">Update</button>
-        <button type="button" class="btn btn-basic" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="delete" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Delete request</h4>
-      </div>
-      <div class="modal-body">
-        <strong>Are you sure?</strong>
-        <input type="hidden" value="" id="deleterequest">
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="delete_button" class="btn btn-info" data-dismiss="modal">Proceed</button>
         <button type="button" class="btn btn-basic" data-dismiss="modal">Close</button>
       </div>
     </div>

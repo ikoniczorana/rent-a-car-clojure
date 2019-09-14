@@ -2,7 +2,6 @@ $(function(){
 var textfield = $("input[name=user]");
             $('button[type="submit"]').click(function(e) {
                 e.preventDefault();
-                //little validation just to check username
                 if (textfield.val() != "") {
                     //$("body").scrollTo("#output");
                     $("#output").addClass("alert alert-success animated fadeInUp").html("Welcome back " + "<span style='text-transform:uppercase'>" + textfield.val() + "</span>");

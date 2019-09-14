@@ -1,31 +1,60 @@
 $(document).ready(function () {
     $(".delete").on('click', function () {
         var row = $(this).closest('tr');
-        console.log("CLick");
-        console.log("Id ", row.attr("id"));
-        $("#deleteuser").val(row.attr("id"));
+        $("#delete_user").val(row.attr("id"));
     });
-
+    $(".update").on('click', function () {
+          var row = $(this).closest('tr');
+          $("#userid").val(row.attr("id"));
+      });
 
     $("#delete_button").on('click', function () {
-        var id = $("#deleteuser").val();
-        $.ajax({
-            type: "POST",
-            url: "/deleteuser",
-            data: {
-                id: id
-            },
-            success: function (data) {
-                $('#' + id).remove();
-                showMessageInfo("success", data.message, "message_div");
-            },
-            error: function (error) {
-                var message = "";
-                error.responseJSON.map(function (item) {
-                    message += item[1] + ".";
-                });
-                showMessageInfo("danger", message, "message_divs");
-            }
+        var id = $("#delete_user").val();
+       $.ajax({
+       		        type: "DELETE",
+       		        url: "/deleteuser",
+       		        data: {
+       		            userid: id
+       		        },
+       		        dataType: 'json',
+       		        success: function(data) {
+       		            window.location = "/home";
+       		        },
+       		        error: function(data) {
+                      window.location = "/home";
+                  }
+
+       		    });
         });
+        $("#edit_button").on('click', function () {
+                var id = $("#userid").val();
+                var password = $("#password").val();
+                var assignedrole = $("#assignedrole").val();
+
+                $.ajax({
+                   type: "POST",
+                    url: "/editUser",
+                    data: {
+                      userid : id,
+                      password : password,
+                      assignedrole : assignedrole
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                      setTimeout(function () {
+                        $("#edit").modal("toggle");
+                        window.location = "/users";
+                        }, 1000);
+                        },
+                   error: function(data) {
+                        setTimeout(function () {
+                            $("#edit").modal("toggle");
+                            window.location = "/users";
+                        }, 1000);
+                        }
+                });
+            });
+
+
     });
-});
+

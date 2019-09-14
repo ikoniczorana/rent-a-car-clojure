@@ -61,7 +61,10 @@
 
 (defn home [session]
   (render-file "home.html" {:title "Home"
-                                 :logged (:identity session)}))
+                             :logged (:identity session)
+                            :admin (layout/is-admin? session)}))
+
+
 
 (defroutes home-routes
            (GET "/" [] (home-page))
