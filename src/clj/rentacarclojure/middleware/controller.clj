@@ -47,10 +47,7 @@
   (k/insert request
             (k/values params)))
 
-(defn get-all-requests[]
-  (k/select request
-    (k/fields :* [:car.type :ctype])
-    (k/join car (= :request.carid :car.carid))))
+
 
 (defn delete-request [id]
   (k/delete request
@@ -80,5 +77,12 @@
 
 (defn get-all-cars[]
   (k/select car))
+
+(defn get-all-requests[]
+  (k/select request
+            (k/fields :* [:car.type :ctype])
+            (k/join car (= :request.carid :car.carid))))
+
+
 
 

@@ -25,8 +25,7 @@
    :idnumber [st/required st/string]
    :driverlicence [st/required st/string]
    :beginningyear [st/required st/number]
-   :fromdate [st/required st/string]
-   :todate [st/required st/string]
+
    :carid [st/required st/number]
    :userid [st/required st/number]})
 
@@ -36,8 +35,7 @@
               :idnumber (:idnumber params)
               :driverlicence (:driverlicence params)
               :beginningyear (read-string (:beginningyear params))
-              :fromdate (:fromdate params)
-              :todate (:todate params)
+
               :carid (read-string (:carid params))
               :userid (read-string (:userid params))} request-schema))
 
@@ -58,7 +56,7 @@
   (request-valid? params)
   (println params)
   (controller/add-request params)
-  (redirect "/home"))
+  (redirect "/requests"))
 
 (defn get-all-request [session &[message]]
   (render-file "requests.html" {:requests (controller/get-all-requests)
