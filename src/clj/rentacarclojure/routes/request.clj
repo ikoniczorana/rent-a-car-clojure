@@ -25,7 +25,6 @@
    :idnumber [st/required st/string]
    :driverlicence [st/required st/string]
    :beginningyear [st/required st/number]
-
    :carid [st/required st/number]
    :userid [st/required st/number]})
 
@@ -35,7 +34,6 @@
               :idnumber (:idnumber params)
               :driverlicence (:driverlicence params)
               :beginningyear (read-string (:beginningyear params))
-
               :carid (read-string (:carid params))
               :userid (read-string (:userid params))} request-schema))
 

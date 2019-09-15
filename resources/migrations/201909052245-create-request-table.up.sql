@@ -1,17 +1,16 @@
 CREATE TABLE request(
-  requestid int(11) NOT NULL AUTO_INCREMENT,
+  requestid int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   name varchar(50) NOT NULL,
   birthyear int(11) NOT NULL,
   idnumber varchar(50) NOT NULL,
   driverlicence varchar(50) NOT NULL,
   beginningyear int(11) NOT NULL,
-  fromdate date ,
-  todate date ,
+  fromdate date,
+  todate date,
   carid int(11) NOT NULL,
   userid int(11) NOT NULL,
-  PRIMARY KEY (requestid),
-  FOREIGN KEY(carid) REFERENCES car(carid) ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY(userid) REFERENCES user(userid) ON UPDATE CASCADE ON DELETE CASCADE
+  FOREIGN KEY(carid) REFERENCES car(carid),
+  FOREIGN KEY(userid) REFERENCES user(userid)
 
 );
 insert  into request(requestid, name, birthyear, idnumber, driverlicence, beginningyear,fromDate, toDate, carid, userid) values
