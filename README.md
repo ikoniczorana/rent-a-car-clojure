@@ -7,10 +7,10 @@ The main goal of the application design is to help the renting agencies employee
 You will need Leiningen 2.0 or above and MySQL installed.
 
 ## Installing
-First step is create database rentacar
-
+First step is create *database* rentacar
+```
 CREATE DATABASE rentacar DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-
+```
 You need to change database parameters that is based in files in configuration folder: 
 >db-config.edn & migratus.conf.edn
 
@@ -42,9 +42,11 @@ Project has different functionalities based on role that is assigned to user.
 
 If the user with 'user' role is logged in, only pages for manipulating with rent requests are visible.
 User mode consists of *Home page*, *Add request* page, and *All requests* page. 
+
 At home page user can see ads for car sales, with photos and prices for cars.
 At add request page, user can add new request for rent a car. 
 At all request page, user can see all requests that is already submitted. As well, user can edit request. 
+
 When the user wants to exit the system, there is an option in the menu bar for logout.
 If the user with 'admin' role is logged in, the pages for manipulating with system users are also visible.
 Admin can add new user into the system at the *Add user* page. 
