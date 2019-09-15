@@ -7,11 +7,8 @@
             [compojure.response :refer [render]]
             [buddy.auth :refer [authenticated?]]
             [liberator.core :refer [defresource]]
-            [clojure.data.json :as json]
-            [clojure.java.io :as io]
             [liberator.representation :refer [ring-response as-response]]
             [clojure.set :refer [rename-keys]]
-            [clojure.string :as str]
             [rentacarclojure.layout :as layout]))
 
 (def login-schema
@@ -47,9 +44,6 @@
   (-> (redirect "/login")
       (assoc :session {})))
 
-(defn home [page session]
-  (render-file "html/home.html" {:title "Home"
-                                 :logged (:identity session)}))
 (defroutes login-routes
            (GET "/login" [] (get-login-page))
            (POST "/login" request (login-page-submit request))
