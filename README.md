@@ -60,4 +60,5 @@ If the user with 'admin' role is logged in, the pages for manipulating with syst
 
 ## References
 Clojure for the brave and true
+
 https://www.baeldung.com/clojure-ring
