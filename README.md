@@ -43,14 +43,15 @@ Project has different functionalities based on role that is assigned to user.
 If the user with 'user' role is logged in, only pages for manipulating with rent requests are visible.
 User mode consists of *Home page*, *Add request* page, and *All requests* page. 
 
-At home page user can see ads for car sales, with photos and prices for cars.
-At add request page, user can add new request for rent a car. 
-At all request page, user can see all requests that is already submitted. As well, user can edit request. 
+- At home page user can see ads for car sales, with photos and prices for cars.
+- At add request page, user can add new request for rent a car. 
+- At all request page, user can see all requests that is already submitted. As well, user can edit request. 
 
 When the user wants to exit the system, there is an option in the menu bar for logout.
 If the user with 'admin' role is logged in, the pages for manipulating with system users are also visible.
-Admin can add new user into the system at the *Add user* page. 
-Admin can see all users in the system at the *All users* page. As well, admin can edit password for user and change the user role. Additionaly, admin can delete users from the system.  
+- Admin can add new user into the system at the *Add user* page. 
+- Admin can see all users in the system at the *All users* page. As well, admin can edit password for user and change the user role. 
+- Additionaly, admin can delete users from the system.  
 
 
 ## Built with
