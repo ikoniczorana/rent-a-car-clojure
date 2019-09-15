@@ -7,7 +7,7 @@ The main goal of the application design is to help the renting agencies employee
 You will need Leiningen 2.0 or above and MySQL installed.
 
 ## Installing
-First step is create *database* rentacar
+First step is create database *rentacar*
 ```
 CREATE DATABASE rentacar DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 ```
